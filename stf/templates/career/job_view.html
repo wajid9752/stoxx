@@ -1,0 +1,280 @@
+
+
+{% extends 'main/base.html' %}
+
+{% load static %}
+{% block header %}
+
+<header class="header">
+
+  <div id="menu-btn" class="fas fa-bars"></div>
+
+  <a href="{% url 'home' %}" class="logo"> <span>Stoxx</span>Zoom</a>
+
+  <nav class="navbar">
+    <a href="{% url 'home' %}">Home</a>
+    <a href="{% url 'home' %}">services</a>
+      <a href="{% url 'home' %}">Courses</a>
+     
+      <a href="{% url 'home' %}">contact</a>
+     
+      <a href="{% url 'blog' %}">Blogs</a>
+      <a href="{% url 'carrer' %}">Carrers</a>
+      
+  </nav>
+  
+  
+  {% if user.is_authenticated %}
+  <div id="login-btn">
+  <a class="btn" href="">{{request.user}}</a>
+  <a class="btn"href="/logout">Logout</a> 
+  
+  <a href="/logout"><i class="fas fa-sign-out-alt"></i></a>
+   </div>
+  {% else %}
+  <div id="login-btn">
+    <a href="/login"> <button class="btn">login</button></a>
+   
+    <a href="/login"><i class="far fa-user"></i></a>
+</div>
+  {% endif %}
+
+</header> 
+
+{% endblock header %} 
+
+
+
+
+{% block content %}
+<!--============  Success Mesaage ========-->
+
+<!--============End  Success Mesaage ========-->
+<style>
+    .home{
+      background-color:  #4070F4;
+    }
+  .home .home-slider .slide{
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap:2rem; 
+      padding-top: 2rem;
+  }
+  
+  .home .home-slider .slide .content{
+      flex:1 1 45rem;
+  }
+  
+  .home .home-slider .slide .image{
+      flex:1 1 45rem;
+  }
+  
+  .home .home-slider .slide .image img{
+      width: 100%;
+  }
+  
+  .home .home-slider .slide .content span{
+      color:var(--green);
+      font-size: 2.5rem;
+      font-weight:bold;
+      color:white;
+  }
+  
+  
+  
+  .home .home-slider .slide .content p{
+      color:var(--light-color);
+      font-size: 2.2rem;
+      padding:.5rem 0;
+      line-height: 1.5;
+      color:white;
+  }
+  
+  </style>
+    <section class="home" id="home">
+  
+      <div class="swiper-container home-slider">
+  
+          <div class="swiper-wrapper wrapper">
+  
+              <div class="swiper-slide slide">
+                  <div class="content">
+                      
+                      
+                      <p>{{get_job.job_title}}</p>
+                      <span>Full Time</span>
+                  </div>
+                  
+              </div>
+  
+           
+  
+          </div>
+  
+         
+  
+      </div>
+  
+  </section>
+<section class="icons-container">
+
+    <div class="icons">
+        <i class="fas fa-home"></i>
+        <div class="content">
+            <h3>Job Experience</h3>
+            <p>{{get_job.job_experience}}</p>
+        </div>
+    </div>
+
+    <div class="icons">
+        <i class="fas fa-graduation-cap"></i>
+        <div class="content">
+            <h3>Qualifications</h3>
+            <p>{{get_job.Qualification}}</p>
+        </div>
+    </div>
+
+    <div class="icons">
+        <i class="fas fa-users"></i>
+        <div class="content">
+            <h3>Department</h3>
+            <p>{{get_job.Department}}</p>
+        </div>
+    </div>
+
+    <div class="icons">
+        <i class="fas fa-list-ol"></i>
+        <div class="content">
+            <h3>No. of Openings</h3>
+            <p>{{get_job.No_of_openings}}</p>
+        </div>
+    </div>
+
+</section>
+    <style>
+        .content_text {
+            width: 95vw;
+            margin: 20px;
+            font-size: 16px;
+            padding:10px 5px 5px 5px ;
+            display:flex;
+ 
+    font-size: 1.5vw; 
+}
+
+    </style>
+
+
+<style>
+
+  
+    .about .row{
+        display: flex;
+        flex-wrap: wrap;
+        gap:1.5rem;
+        align-items: center;
+       
+    }
+    
+    .about .row .image{
+        flex:1 1 45rem;
+    }
+    
+    .about .row .image img{ 
+        width: 100%;
+    }
+    
+    .about .row .content{
+        flex:1 1 45rem;
+    }
+    
+    .about .row .content h3{
+        color: #4070F4;
+        font-size: 4rem;
+        padding:.5rem 0;
+    }
+    
+    .about .row .content p{
+        color:var(--light-color);
+        font-size: 1.5rem;
+        padding:.5rem 0;
+        line-height: 2;
+    }
+    
+    .about .row .content .icons-container{
+        display: flex;
+        gap:1rem;
+        flex-wrap: wrap;
+        padding:1rem 0;
+        margin-top: .5rem;
+    }
+    
+    .about .row .content .icons-container .icons{
+        background:#eee;
+        border-radius: .5rem;
+        border:.1rem solid rgba(0,0,0,.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap:1rem;
+        flex:1 1 17rem;
+        padding:1.5rem 1rem;
+    }
+    
+    .about .row .content .icons-container .icons i{
+        font-size: 2.5rem;
+        color:var(--green);
+    }
+    
+    .about .row .content .icons-container .icons span{
+        font-size: 1.5rem;
+        color:var(--black);
+    }
+    form #id_Name ,#id_Email ,#id_Mobile ,#id_resume{
+    width:100%;
+    border-radius: .7rem;
+    padding:1rem 1.2rem;
+    font-size: 1.6rem;
+    text-transform: none;
+    border:2px solid #4070F4;
+    margin:.7rem 0;
+}
+form label {
+font-size:16px;
+}
+    </style>
+
+
+<section class="about" id="about">
+   
+    <div class="row">
+        <div class="content">
+            <h3>Job description</h3>
+            <p>{{get_job.job_description}}</p> 
+        </div>
+        <div class="image">
+            <form action="{% url 'resume' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {{form.as_p}}
+<!--                  
+                  <input type="text" name="Name" placeholder="your name" class="box">
+                  <input type="email" name="Email" placeholder="your email" class="box">
+                  <input type="text" name="Mobile" placeholder="mobile number" class="box">
+                  <input type="file" name="resume" placeholder="your email" class="box">
+                   -->
+                  <input type="submit" value="send message" class="btn">
+              </form>
+
+              
+        </div>
+  
+       
+  
+    </div>
+  
+
+  
+  </section>
+{% endblock %}

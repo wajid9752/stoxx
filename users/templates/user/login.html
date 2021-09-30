@@ -1,0 +1,106 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--===== CSS =====-->
+        <link rel="stylesheet" href="{% static 'frontend/login/css/styles.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+        
+        <style>
+          .g_google{
+              /* background-color:red; */
+              margin:10px;
+              font-size:28px; 
+          }
+
+          .f_facebook{
+              /* background-color:red; */
+              margin:10px;
+              font-size:28px;
+          }
+
+          .flx{
+            display:flex;
+          }
+
+          .f__button{
+  display: block;
+  margin-left: auto;
+  padding: .75rem 2rem;
+  outline: none;
+  border: none;
+  background-color:#069C54;
+  color: #fff;
+  font-size: var(--normal-font-size);
+  border-radius: .5rem;
+  cursor: pointer;
+  transition: .3s;
+  text-decoration: none;
+            text-align: center;
+}
+.ggg{
+    color: #DB4437;
+}
+.reg{
+    text-decoration:none;
+    color:#069C54;
+}
+        </style>
+    </head>
+    <body>
+        <div class="l-form">
+            <form action="" class="form" method="post">
+                <h1 class="form__title">Sign In</h1>
+                <!--Strat Error Message -->
+                {% for field in login_form %}
+                 <p>
+                 {% for error in field.errors %}
+                 <p style="color: red">{{ error }}</p>
+                 {% endfor %}
+                 </p>
+                 {% endfor %}
+                 {% if login_form.non_field_errors %}
+                 <div style="color: red">
+                 <p>{{login_form.non_field_errors}}</p>
+                 </div>
+ 
+                 {% endif %}
+                 <!-- Error Message End -->
+                 {% csrf_token %} 
+                <div class="form__div">
+                    <input type="email" name="email" class="form__input" placeholder=" ">
+                    <label for="" class="form__label">Email</label>
+                </div>
+
+                <div class="form__div">
+                    <input type="password" name="password" class="form__input" placeholder=" ">
+                    <label for="" class="form__label">Password</label>
+                </div>
+           
+                <input type="submit" class="form__button" value="Sign In">
+
+            
+                <!-- <p><a style="color:red ;text-decoration: none;" href="">Forget Password</a></p> -->
+               
+               <p>login with</p>
+               <div class="flx">
+               <p class="g_google"><a class="ggg" href="{% url 'social:begin' 'google-oauth2' %}"><i class="fab fa-google"></i></a></p>
+               <p class="f_facebook"><a href="{% url 'social:begin' 'facebook' %}"><i class="fab fa-facebook"></i></a></p> 
+              </div>
+
+              <p>Create an account <a class="reg" href="{% url 'register' %}">Register</a></p>
+                <div>
+                  
+                <a href="{% url 'home' %}" class="f__button">back to home</a>
+              </div>
+            </form>
+           
+        </div>
+    </body>
+</html>
+

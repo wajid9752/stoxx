@@ -1,0 +1,104 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+
+
+{% block header %}
+
+<header class="header">
+
+  <div id="menu-btn" class="fas fa-bars"></div>
+
+  <a href="{% url 'home' %}" class="logo"> <span>Stoxx</span>Zoom</a>
+
+  <nav class="navbar">  
+    <a href="{% url 'home' %}">Home</a>
+    <a href="{% url 'home' %}">services</a>
+    <a href="{% url 'home' %}">Courses</a>
+    <!-- <a href="{% url 'home' %}">About us</a> -->
+    <a href="{% url 'home' %}">contact</a>
+    <a href="{% url 'blog' %}">Blogs</a>
+    <a href="{% url 'carrer' %}">Carrers</a>
+      
+  </nav>
+  
+  {% if user.is_authenticated %}
+  <div id="login-btn">
+  <a class="btn" href="">{{request.user}}</a>
+  <a class="btn"href="/logout">Logout</a> 
+  <a href="/logout"><i class="fas fa-sign-out-alt"></i></a>
+   </div>
+  {% else %}
+  <div id="login-btn">
+    <a href="/login"> <button class="btn">login</button></a>
+   
+    <a href="/login"><i class="far fa-user"></i></a>
+</div>
+  {% endif %}
+
+</header> 
+
+{% endblock header %} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static  'frontend/blog/blog.css' %}">
+<section id="blog" class="blog">
+<div class="col-lg-8 entries">
+    {% for blog in blogs %}
+    <article class="entry" data-aos="fade-up">
+
+      <div class="entry-img">
+        <img src="{{blog.image.url}}" alt="" class="img-fluid">
+      </div>
+
+      <h2 class="entry-title">
+        <a href="blog-single.html">{{blog.title}}</a>
+      </h2>
+
+      <div class="entry-meta">
+        <ul>
+          <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">Jan 1, 2020</time></a></li>
+
+        </ul>
+      </div>
+
+      <div class="entry-content">
+        <p>
+         {{blog.description|safe}}
+        </p>
+        <div class="read-more">
+          <!-- <a href="blog-single.html">Read More</a> -->
+        </div>
+      </div>
+
+    </article><!-- End blog entry -->
+
+    {% endfor %}
+
+    
+
+
+
+  </div><!-- End blog entries list -->
+
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,100 @@
+
+
+{% extends 'main/base.html' %}
+
+{% load static %}
+{% block header %}
+
+
+
+<header class="header">
+
+  <div id="menu-btn" class="fas fa-bars"></div>
+
+  <a href="{% url 'home' %}" class="logo"> <span>Stoxx</span>Zoom</a>
+
+  <nav class="navbar">
+    <a href="{% url 'home' %}">Home</a>
+    <a href="{% url 'home' %}">services</a>
+      <a href="{% url 'home' %}">Courses</a>
+     
+      <a href="{% url 'home' %}">contact</a>
+     
+      <a href="{% url 'blog' %}">Blogs</a>
+      <a href="{% url 'carrer' %}">Carrers</a>
+      
+  </nav>
+  
+  
+  {% if user.is_authenticated %}
+  <div id="login-btn">
+  <a class="btn" href="">{{request.user}}</a>
+  <a class="btn"href="/logout">Logout</a> 
+  
+  <a href="/logout"><i class="fas fa-sign-out-alt"></i></a>
+   </div>
+  {% else %}
+  <div id="login-btn">
+    <a href="/login"> <button class="btn">login</button></a>
+   
+    <a href="/login"><i class="far fa-user"></i></a>
+</div>
+  {% endif %}
+
+</header> 
+
+{% endblock header %} 
+
+
+{% block content %}
+
+
+
+
+
+<link rel="stylesheet" href="{% static  'frontend/career/css/styles.css' %}">
+<section class="card container grid">
+  <div class="card__container grid">
+      <!--==================== CARD 1 ====================-->
+      {% for career in careers %}
+      <article class="card__content grid">
+      
+          <header class="card__header">
+              <!-- <div class="card__header-circle grid">
+                  <img src="assets/img/free-coin.png" alt="" class="card__header-img">
+              </div> -->
+              
+              <span class="card__header-subtitle">{{career.job_publish}}</span>
+              <h1 class="card__header-title">{{career.job_title}}</h1>
+          </header>
+          
+          <ul class="card__list grid">
+              <li class="card__list-item">
+                  <i class="uil uil-check card__list-icon"></i>
+                  <p class="card__list-description"><i class="fas fa-clock"></i>  {{career.job_experience}} years experience</p>
+              </li>
+              <li class="card__list-item">
+                  <i class="uil uil-check card__list-icon"></i>
+                  <p class="card__list-description"><i class="far fa-hand-point-right"></i> {{career.job_type}}</p>
+              </li>
+              <li class="card__list-item">
+                  <i class="uil uil-check card__list-icon"></i>
+                  <p class="card__list-description"><i class="fas fa-graduation-cap"></i>  {{career.Qualification}}</p>
+              </li>
+              <li class="card__list-item">
+                  <i class="uil uil-check card__list-icon"></i>
+                  <p class="card__list-description"><i class="fas fa-map-marker-alt"></i> {{career.location}}</p>
+              </li>
+          </ul>
+            <a href="{% url 'job_view' career.id %}"><button class="card__button">Check</button></a>
+          
+      </article>
+
+      <!--==================== CARD 2 ====================-->
+     {% endfor %}
+  </div>
+</section>
+
+
+
+{% endblock content %}
